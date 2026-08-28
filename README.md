@@ -17,3 +17,5 @@ then open a pull request against `main`.
 
 ## For the integration team
 See `ARCHITECTURE.md`.
+
+<!-- CI validation re-run -->

@@ -16,9 +16,10 @@ preprocessing of its own.
 import time
 
 import numpy as np
-from models.base_model import BaseModel
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.svm import SVC
+
+from models.base_model import BaseModel
 
 # The only kernels the platform allows a group-13 instance to select.
 # SVC itself also accepts "precomputed" and arbitrary callables; the

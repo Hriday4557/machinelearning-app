@@ -9,6 +9,7 @@ import numpy as np
 
 from models.group_13_svm.model import SVMModel
 
+
 class TestSVMModelFitting(unittest.TestCase):
     """fit() behaviour: return value, state updates, validation."""
 

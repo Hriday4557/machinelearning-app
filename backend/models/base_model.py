@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Optional
 
 import numpy as np
 
@@ -42,7 +41,8 @@ class BaseModel(ABC):
     def get_metadata(self) -> dict:
         """Return the metadata dict specified in the coding standards."""
         ...
-def get_visualization_data(self) -> dict | None:
+
+    def get_visualization_data(self) -> dict | None:
         """Optional: JSON-serialisable data for model-specific visuals.
 
         Override only if your model produces visuals the generic metrics

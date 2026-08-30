@@ -471,10 +471,22 @@ def run_ruff(folder: Path, backend_dir: Path, results: list[CheckResult]) -> Non
 
 
 def run_pytest_coverage(folder: Path, backend_dir: Path, results: list[CheckResult]) -> None:
+    # Section 12/13 mandates the submission's test file be named exactly
+    # `test.py` and run as `pytest test.py`. Pointing pytest at the folder
+    # instead relies on its default discovery (test_*.py / *_test.py), which
+    # never matches a bare `test.py` — that silently collects zero tests and
+    # reports 0% coverage no matter how good the group's tests actually are.
+    test_file = folder / "test.py"
+    if not test_file.is_file():
+        results.append(CheckResult(
+            f"pytest with >={COVERAGE_THRESHOLD}% coverage", False,
+            f"Expected {test_file} per Section 13 — no test.py found in the submission folder.",
+        ))
+        return
     try:
         proc = subprocess.run(
             [
-                sys.executable, "-m", "pytest", str(folder),
+                sys.executable, "-m", "pytest", str(test_file),
                 f"--cov={folder}", "--cov-report=term-missing",
                 f"--cov-fail-under={COVERAGE_THRESHOLD}", "-q",
             ],
